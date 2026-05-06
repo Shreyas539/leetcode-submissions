@@ -22,3 +22,23 @@ Input: nums = [2,1,5,0,4,6]
 Output: true
 Explanation: One of the valid triplet is (1, 4, 5), because nums[1] == 1 < nums[4] == 4 < nums[5] == 6.
  
+////////////////////
+
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+       int first = Integer.MAX_VALUE;
+       int second = Integer.MAX_VALUE;
+
+       for(int num:nums){
+        if(num<=first){
+            first = num;
+        }else if(num<=second){
+            second = num;
+        }else{
+            return true;
+        }
+       }
+
+       return false;
+    }
+}
