@@ -1,0 +1,82 @@
+643. Maximum Average Subarray I
+
+Easy
+
+You are given an integer array nums consisting of n elements, and an integer k.
+
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+
+ 
+
+Example 1:
+
+Input: nums = [1,12,-5,-6,50,3], k = 4
+Output: 12.75000
+Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+Example 2:
+
+Input: nums = [5], k = 1
+Output: 5.00000
+
+//////////////
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        // 890ms
+        // int l = 0;
+        // double maxAverage = Integer.MIN_VALUE;
+        // double sum=0.0;
+        // for(int r=0;r<nums.length;r++){
+        //     sum+=nums[r];
+
+        //     if((r-l+1)==k){
+        //         double avg = sum/k;
+        //         maxAverage = Math.max(maxAverage,avg);
+        //         System.out.println("Avg= "+avg);
+        //         sum-=nums[l];
+        //         l++;
+        //     }
+        // }
+
+        // return maxAverage;
+
+        //////////////////////////////
+        // 6ms
+        // int l = 0;
+        // double maxSum = Integer.MIN_VALUE;
+        // double sum=0.0;
+        // for(int r=0;r<nums.length;r++){
+        //     sum+=nums[r];
+
+        //     if((r-l+1)==k){
+                
+        //         maxSum = Math.max(maxSum,sum);
+        //         // System.out.println("Avg= "+avg);
+        //         sum-=nums[l];
+        //         l++;
+        //     }
+        // }
+
+        // return (double)maxSum/k;
+
+        /////////////////////////////////////
+        // 3ms
+        int l = 0;
+        double sum=0.0;
+
+        for(int i=0;i<k;i++){
+            sum+=nums[i];
+        }
+
+        double maxSum = sum;
+        for(int r=k;r<nums.length;r++){
+            sum+=nums[r]-nums[r-k];
+            if(sum>maxSum){
+                maxSum=sum;
+            }
+            
+        }
+
+        return (double)maxSum/k;
+    }
+}
