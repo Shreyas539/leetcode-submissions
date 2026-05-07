@@ -1,0 +1,115 @@
+1456. Maximum Number of Vowels in a Substring of Given Length
+
+Medium
+
+Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+
+Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+
+ 
+
+Example 1:
+
+Input: s = "abciiidef", k = 3
+Output: 3
+Explanation: The substring "iii" contains 3 vowel letters.
+Example 2:
+
+Input: s = "aeiou", k = 2
+Output: 2
+Explanation: Any substring of length 2 contains 2 vowels.
+Example 3:
+
+Input: s = "leetcode", k = 3
+Output: 2
+Explanation: "lee", "eet" and "ode" contain 2 vowels.
+
+//////////////
+
+class Solution {
+    public int maxVowels(String s, int k) {
+        int maxCnt = 0;
+
+        int l =0;
+        Set<Character> set = new HashSet<>();
+
+        for(char ch:"aeiou".toCharArray()){
+            set.add(ch);
+        }
+        
+        // 21ms
+        int cnt=0;
+        for(int i=0;i<k;i++){
+            if(set.contains(s.charAt(i))){
+                cnt++;
+            }
+        }
+        maxCnt =cnt;
+        for(int r=k;r<s.length();r++){
+            if(set.contains(s.charAt(r-k))){
+                cnt--;
+                l++;
+            }
+            if(set.contains(s.charAt(r))){
+                cnt++;
+            }
+
+            
+
+            if(cnt>maxCnt){
+                maxCnt =cnt;
+            }
+        }
+
+        return maxCnt;
+
+        // 23ms
+        // int cnt=0;
+        // for(int r=0;r<s.length();r++){
+        //     if(set.contains(s.charAt(r))){
+        //         cnt++;
+        //     }
+
+        //     if((r-l+1)==k){
+        //         maxCnt = Math.max(cnt,maxCnt);
+        //         if(set.contains(s.charAt(l))){
+        //             cnt--;
+        //         }
+        //         l++;
+        //     }
+
+
+        // }
+
+        // return maxCnt;
+
+        // 22ms
+        // Set<Character> vowels = new HashSet<>();
+        // for (char c : "aeiou".toCharArray()) {
+        //     vowels.add(c);
+        // }
+
+        // int count = 0;
+        // // Initial window
+        // for (int i = 0; i < k; i++) {
+        //     if (vowels.contains(s.charAt(i))) {
+        //         count++;
+        //     }
+        // }
+
+        // int maxCount = count;
+
+        // // Slide the window
+        // for (int i = k; i < s.length(); i++) {
+        //     if (vowels.contains(s.charAt(i))) {
+        //         count++;
+        //     }
+        //     if (vowels.contains(s.charAt(i - k))) {
+        //         count--;
+        //     }
+        //     maxCount = Math.max(maxCount, count);
+        // }
+
+        // return maxCount;
+    }
+}
