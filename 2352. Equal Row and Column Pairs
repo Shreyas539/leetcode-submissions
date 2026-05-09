@@ -25,3 +25,46 @@ Explanation: There are 3 equal row and column pairs:
 - (Row 2, Column 2): [2,4,2,2]
 - (Row 3, Column 2): [2,4,2,2]
  
+class Solution {
+    public int equalPairs(int[][] grid) {
+        
+        HashMap<Integer,int[]> rows= new HashMap<>();
+        HashMap<Integer,int[]> cols= new HashMap<>();
+
+        int m = grid.length, n = grid[0].length;
+        for(int i =0;i<m;i++){
+            int[] row = new int[n];
+            for(int j=0;j<n;j++){
+                row[j]=grid[i][j];
+            }
+            rows.put(i,row);
+        }
+
+        for(int i =0;i<n;i++){
+            int[] col = new int[n];
+            for(int j=0;j<n;j++){
+                col[j]=grid[j][i];
+            }
+            cols.put(i,col);
+        }
+
+        int cnt=0;
+
+        for(int rowkey:rows.keySet()){
+            int[] row = rows.get(rowkey);
+            
+            for(int colkey:cols.keySet()){
+                int[] col = cols.get(colkey);
+
+                if(Arrays.equals(row,col)){
+                    cnt++;
+                }
+            }
+        }
+
+        return cnt;
+
+
+
+    }
+}
