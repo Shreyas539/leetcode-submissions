@@ -19,7 +19,7 @@ class Solution {
     private void bfs(char[][] grid,int row,int col){
         if(grid[row][col]=='0') return;
         char temp = grid[row][col];
-        grid[row][col] = '0';
+        grid[row][col] = '#';
 
         for(int[] dir:dirs){
             int nr = row+dir[0];
