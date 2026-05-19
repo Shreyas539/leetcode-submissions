@@ -8,7 +8,7 @@ class Solution {
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]=='1'){
-                    bfs(grid,i,j);
+                    dfs(grid,i,j);
                     cnt++;
                 }
             }
@@ -16,7 +16,7 @@ class Solution {
         return cnt;
     }
 
-    private void bfs(char[][] grid,int row,int col){
+    private void dfs(char[][] grid,int row,int col){
         if(grid[row][col]=='0') return;
         char temp = grid[row][col];
         grid[row][col] = '#';
@@ -27,11 +27,11 @@ class Solution {
 
             if(nr>=0 && nr<grid.length && nc>=0 && nc<grid[0].length && grid[nr][nc]=='1'){
                 
-                bfs(grid,nr,nc);
+                dfs(grid,nr,nc);
             }
 
         }
 
-        
+       
     }
 }
