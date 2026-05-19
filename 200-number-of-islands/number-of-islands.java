@@ -17,19 +17,28 @@ class Solution {
     }
 
     private void dfs(char[][] grid,int row,int col){
-        if(grid[row][col]=='0') return;
-        char temp = grid[row][col];
-        grid[row][col] = '#';
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{row,col});
+        grid[row][col]='#';
 
-        for(int[] dir:dirs){
-            int nr = row+dir[0];
-            int nc = col+dir[1];
+        while(!q.isEmpty()){
+            
 
-            if(nr>=0 && nr<grid.length && nc>=0 && nc<grid[0].length && grid[nr][nc]=='1'){
-                
-                dfs(grid,nr,nc);
+            int[] cur = q.poll();
+            int r = cur[0];
+            int c = cur[1];
+
+            for(int[] dir:dirs){
+
+                int nr = r+dir[0];
+                int nc = c+dir[1];
+
+                if(nr>=0 && nr<grid.length && nc>=0 && nc<grid[0].length && grid[nr][nc]=='1'){
+                    grid[nr][nc]='#';
+                    q.offer(new int[]{nr,nc});                    
+                }
+
             }
-
         }
 
        
