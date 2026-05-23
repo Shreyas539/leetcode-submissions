@@ -2,10 +2,10 @@ class Solution {
     public long totalCost(int[] costs, int k, int candidates) {
         int n = costs.length;
 
-        // PriorityQueue<int[]> pqleft = new PriorityQueue<>((a,b)->a[0]-b[0]);
-        // PriorityQueue<int[]> pqright = new PriorityQueue<>((a,b)->a[0]-b[0]);
-         PriorityQueue<int[]> pqleft = new PriorityQueue<>((a,b) -> a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
-        PriorityQueue<int[]> pqright = new PriorityQueue<>((a,b) -> a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
+        PriorityQueue<int[]> pqleft = new PriorityQueue<>((a,b)->a[0]-b[0]);
+        PriorityQueue<int[]> pqright = new PriorityQueue<>((a,b)->a[0]-b[0]);
+        //  PriorityQueue<int[]> pqleft = new PriorityQueue<>((a,b) -> a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
+        // PriorityQueue<int[]> pqright = new PriorityQueue<>((a,b) -> a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
 
         int left = 0,right=n-1;
 
