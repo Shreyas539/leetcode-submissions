@@ -17,7 +17,7 @@ class Solution {
     boolean canEatAll(int k,int[] piles,int h){
         long hrs = 0;
         for(int pile:piles){
-            hrs += (pile+k-1)/k;
+            hrs += Math.ceil((double)pile/k);
             if(hrs>h) return false;
         }
         return hrs<=h;
