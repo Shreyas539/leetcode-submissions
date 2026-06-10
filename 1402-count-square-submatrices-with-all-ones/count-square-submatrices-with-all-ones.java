@@ -34,9 +34,9 @@ class Solution {
 
                 ans+=dp[i][j];
                 }
-                System.out.print(dp[i][j]+" ");
+                
             }
-            System.out.println();
+            
         }
         return ans;
     }
