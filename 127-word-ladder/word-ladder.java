@@ -1,37 +1,35 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Set<String> wordSet = new HashSet<>(wordList);
+        Set<String> set = new HashSet<>(wordList);
         int steps = 1;
-
         Queue<String> q = new LinkedList<>();
         q.offer(beginWord);
 
         while(!q.isEmpty()){
 
+            int size = q.size();
 
-            int len = q.size();
+            for(int i=0;i<size;i++){
+                String curword = q.poll();
+                char[] curwordarr = curword.toCharArray();
 
-            for(int i=0;i<len;i++){
-                String word = q.poll();
-                if(word.equals(endWord)) return steps;
-                char[] wordArr = word.toCharArray();
+                if(curword.equals(endWord)) return steps;
+                for(int j=0;j<curword.length();j++){
+                    char orgchar = curwordarr[j];
+                    for(char ch='a';ch<='z';ch++){
+                        if(ch==orgchar) continue;
 
-                for(int j=0;j<word.length();j++){
-                    char orgchar = word.charAt(j);
+                        curwordarr[j]=ch;
 
-                    for(char c='a';c<='z';c++){
-                        if(c==orgchar)continue;
+                        String newword = new String(curwordarr);
 
-                        wordArr[j]=c; 
-
-                        String newword = new String(wordArr);
-                        if(wordSet.contains(newword)){
-                            wordSet.remove(newword);
+                        if(set.contains(newword)){
                             q.offer(newword);
+                            set.remove(newword);
                         }
-                    }
 
-                    wordArr[j]=orgchar;
+                    }
+                    curwordarr[j] = orgchar;
                 }
             }
             steps++;
