@@ -1,46 +1,38 @@
 class Solution {
-    int m;
-    int n;
-    int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+    int[][] dir = {{-1,0},{0,-1},{1,0},{0,1}};
     public void solve(char[][] board) {
-        m = board.length;
-        n = board[0].length;
+        int m = board.length;
+        int n = board[0].length;
 
-       bfs(board);
-        
-    }
-
-    private void bfs(char[][] board){
-            
-        Queue<int[]> q = new LinkedList<>();
-        
         for(int i=0;i<m;i++){
-            if(board[i][0]=='O') q.offer(new int[]{i,0});
-            if(board[i][n-1]=='O') q.offer(new int[]{i,n-1});
+            if(board[i][0]=='O') dfs(board,i,0);
+            if(board[i][n-1]=='O') dfs(board,i,n-1);
         }
         for(int i=0;i<n;i++){
-            if(board[0][i]=='O') q.offer(new int[]{0,i});
-            if(board[m-1][i]=='O') q.offer(new int[]{m-1,i});
-        }
-
-        while(!q.isEmpty()){
-
-            int[] cell = q.poll();
-            int r = cell[0];
-            int c = cell[1];
-            if(r<0 || c<0 || r>=m || c>=n || board[r][c]!='O') continue;
-            board[r][c]='#';
-            for(int[] dir:dirs){
-                q.offer(new int[]{r+dir[0],c+dir[1]});
-
-            }
+            if(board[0][i]=='O') dfs(board,0,i);
+            if(board[m-1][i]=='O') dfs(board,m-1,i);
         }
 
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(board[i][j]=='#') board[i][j]='O';
-                else if(board[i][j]=='O') board[i][j]='X';
+                if(board[i][j]=='#'){
+                    board[i][j]='O';
+                }else if(board[i][j]=='O'){
+                    board[i][j]='X';
+                }
             }
+        }
+    }
+    private void dfs(char[][] board,int r,int c){
+        if(r<0 || c<0 || r>=board.length || c>=board[0].length || board[r][c]!='O'){
+            return;
+        }
+
+        board[r][c]='#';
+        for(int[] d:dir){
+            int nr = r+d[0];
+            int nc = c+d[1];
+            dfs(board,nr,nc);
         }
     }
 }
