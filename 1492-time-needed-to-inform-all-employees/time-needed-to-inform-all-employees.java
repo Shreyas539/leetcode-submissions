@@ -12,21 +12,32 @@ class Solution {
                 adj.get(manager[i]).add(i);
             }
         }
+
+
         
-        Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[]{headID,0});
-        int maxtime = 0;
-        while(!q.isEmpty()){
-            int[] cur = q.poll();
-            int id= cur[0];
-            int time = cur[1];
+        // Queue<int[]> q = new LinkedList<>();
+        // q.offer(new int[]{headID,0});
+        // int maxtime = 0;
+        // while(!q.isEmpty()){
+        //     int[] cur = q.poll();
+        //     int id= cur[0];
+        //     int time = cur[1];
 
-            maxtime = Math.max(maxtime,time);
+        //     maxtime = Math.max(maxtime,time);
 
-            for(int emp:adj.get(id)){
-                q.offer(new int[]{emp,time+informTime[id]});
-            }
+        //     for(int emp:adj.get(id)){
+        //         q.offer(new int[]{emp,time+informTime[id]});
+        //     }
+        // }
+        return dfs(adj,informTime,headID);
+    }
+    private int dfs(List<List<Integer>> adj,int[] it,int hid){
+        int maxtime=0;
+
+        for(int idx:adj.get(hid)){
+            maxtime = Math.max(maxtime,dfs(adj,it,idx));
         }
-        return maxtime;
+
+        return maxtime+it[hid];
     }
 }
