@@ -20,15 +20,17 @@ class Solution {
         cur.add(node);
         if(node==n-1){
             res.add(new ArrayList<>(cur));
-            return;
+            
+        }else{
+            for(int nei:adj.get(node)){
+                
+                bc(adj,res,nei,cur,n);
+            }
+
         }
+        cur.remove(cur.size()-1);
 
         
 
-        for(int nei:adj.get(node)){
-            
-            bc(adj,res,nei,cur,n);
-            cur.remove(cur.size()-1);
-        }
     }
 }
