@@ -1,11 +1,14 @@
 class Solution {
     int[] parent;
+    int[] size;
     public int minCostConnectPoints(int[][] points) {
         int n = points.length;
         parent = new int[n];
+        size = new int[n];
         List<int[]> edges = new ArrayList<>();
         for(int i=0;i<n;i++){
             parent[i] = i;
+            size[i]=1;
         }
 
         for(int i=0;i<n;i++){
@@ -36,7 +39,14 @@ class Solution {
             return false;
         }
 
+        if(size[rootA]<size[rootB]){
+            int temp = rootA;
+            rootA = rootB;
+            rootB = temp;
+        }
+
         parent[rootB]=rootA;
+        size[rootA]+=size[rootB];
 
         return true;
     }
