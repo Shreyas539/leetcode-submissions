@@ -44,6 +44,6 @@ class Solution {
             }
         }
 
-        return diff==0 || diff ==2;
+        return diff==0 || diff ==2 || diff==1;
     }
 }
