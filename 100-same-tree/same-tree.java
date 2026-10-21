@@ -50,6 +50,6 @@ class Solution {
 
         }
 
-        return q1.isEmpty() && q2.isEmpty();
+        return true;
     }
 }
