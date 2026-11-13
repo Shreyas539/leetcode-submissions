@@ -3,10 +3,8 @@ class Solution {
         
         int[][] dp = new int[m][n];
 
-        if(m==1 || n==1) return 1;
-        dp[0][1] = 1;
-        dp[1][0]=1;
-
+        // if(m==1 || n==1) return 1;
+        
         for(int i=0;i<m;i++){
             dp[i][0] = 1;
         }
@@ -19,13 +17,7 @@ class Solution {
                 dp[i][j] = dp[i-1][j] + dp[i][j-1];
             }
         }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                System.out.print(dp[i][j]+" ");
-            }
-            System.out.println();
-        }
-
+        
         return dp[m-1][n-1];
     }
 }
